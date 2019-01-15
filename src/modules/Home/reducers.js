@@ -1,20 +1,20 @@
 import {
   GET_ITEM,
-  GET_ITEM_SUCCESS,
-  GET_ITEM_FAIL,
-  HIDE_UNDO,
-  REMOVE_MESSAGE
+  APPLY_PROMO_CODE,
+  APPLY_PICKUP_DISCOUNT,
+  CHANGE_ZIP_CODE
 } from "./constants";
 
 let INITIAL_STATE = {
   item: {
     itemName: "Chair",
-    itemDescription: "Damn Fine Chair",
+    itemDescription: "Really really Damn Fine Chair - should be red though...",
     itemImageUrl:
       "https://i5.walmartimages.com/asr/90c1aad2-a3b3-4711-a29f-7b42b25aeadf_1.e83f74dfd7486d797bd0882996d1e3a4.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF",
     itemPrice: 115.0,
     itemPickupDiscount: 4.35,
-    itemPromoCode: "DISCOUNT"
+    itemPromoCode: "DISCOUNT",
+    itemPromoDiscount: 0.1
   },
   labels: {
     subTotal: "Subtotal",
@@ -32,52 +32,39 @@ let INITIAL_STATE = {
     94070: 0.11,
     37355: 0.01,
     0: 0.05
-  }
+  },
+  currentTaxRate: 0.05,
+  currentZipCode: 94070,
+  pickupDiscount: 0,
+  promoDiscount: 0
 };
 
-let newState; //out of habit I only copy state when I need to
-let messages;
 const moduleReducer = (state = INITIAL_STATE, action) => {
+  console.log(action);
+  let newState = { ...state };
+  console.log(newState);
+  console.log(newState.pickupDiscount);
   switch (action.type) {
     case GET_ITEM:
-      newState = { ...state };
-      newState.messagesLoaded = false;
-
       return newState;
 
-    case GET_ITEM_SUCCESS:
-      newState = { ...state };
-      messages = [...newState.messages];
-
-      newState = { ...state };
-      newState.pageToken = action.response.pageToken;
-      messages = messages.concat(action.response.messages);
-      newState.messages = messages;
-      newState.messagesLoaded = true;
-
+    case APPLY_PROMO_CODE:
+      if (action.value === state.item.itemPromoCode) {
+        newState.promoDiscount = state.item.itemPromoDiscount;
+      } else {
+        newState.promoDiscount = 0;
+      }
       return newState;
 
-    case GET_ITEM_FAIL:
-      newState = { ...state };
-      newState.messagesLoaded = true;
+    case APPLY_PICKUP_DISCOUNT:
+      newState.pickupDiscount =
+        newState.pickupDiscount !== 0 ? 0 : state.item.itemPickupDiscount;
+      console.log(newState.pickupDiscount);
       return newState;
 
-    case HIDE_UNDO:
-      newState = { ...state };
-      newState.undoable = false;
-
-      return newState;
-
-    case REMOVE_MESSAGE:
-      newState = { ...state };
-      messages = [...newState.messages];
-      messages = [
-        ...messages.slice(0, action.index),
-        ...messages.slice(action.index + 1)
-      ];
-      newState.messages = messages;
-      newState.undoable = true;
-
+    case CHANGE_ZIP_CODE:
+      newState.currentZipCode = action.zipcode;
+      newState.currentTaxRate = state.taxes[action.zipcode] || 0.05;
       return newState;
 
     default:

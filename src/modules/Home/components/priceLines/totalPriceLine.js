@@ -3,27 +3,20 @@ import styled from "styled-components";
 
 import CurrencyFormat from "../currencyFormat";
 
-const FeesPriceLine = props => {
+const TotalPriceLine = props => {
+  console.log("TOTALLY");
   const label = props.label.replace(
     "${zip}",
     props.zip || " the national average."
   );
   return (
     <Container>
-      <LeftItem>{label}</LeftItem>
+      <LeftItem style={props.style}>{label}</LeftItem>
       <CurrencyFormat style={props.currencyStyle} value={props.value} />
     </Container>
   );
 };
-export default FeesPriceLine;
-
-const onClick = event => {
-  event.stopPropagation();
-  alert("woo");
-};
-const onMouseOver = event => {
-  event.stopPropagation();
-};
+export default TotalPriceLine;
 
 const Container = styled.div`
   position: relative;
@@ -37,39 +30,9 @@ const Container = styled.div`
 `;
 
 const LeftItem = styled.div`
-  font-size: ${props => props.size || 0.75}rem;
+  font-size: ${props => (props.style ? props.style.size : 0.75)}rem;
 `;
 const RightItem = styled.div`
-  font-size: ${props => props.size || 0.75}rem;
+  font-size: ${props => (props.style ? props.style.size : 0.75)}rem;
   color: red;
-`;
-
-const PopUpContainer = styled.div`
-  position: absolute;
-  text-decoration: none;
-  top: 19px;
-  left: 8%;
-  z-index: 1;
-  color: rgba(50, 50, 50, 0.8);
-`;
-const PopUpTriangle = styled.div`
-  width: 5px;
-  height: 5px;
-  border-top: 1px solid rgba(100, 100, 100, 0.5);
-  border-left: 1px solid rgba(100, 100, 100, 0.5);
-  border-right: none;
-  border-bottom: none;
-  transform: rotate(45deg);
-  background-color: white;
-`;
-const PopUpText = styled.div`
-  font-size: ${props => props.size || 0.75}rem;
-  border-radius: 3px;
-  margin-left: -23px;
-  margin-top: -4px;
-  border: 1px solid rgba(100, 100, 100, 0.5);
-  padding: 3px;
-  border-radius: 4px;
-  max-width: 134px;
-  padding: 7px;
 `;

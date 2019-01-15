@@ -7,6 +7,8 @@ import FeesPriceLine from "./feesPriceLine";
 import TotalPriceLine from "./totalPriceLine";
 
 const PriceLines = props => {
+  console.log("priceline");
+  console.log(props.total);
   return (
     <Container>
       <SimplePriceLine
@@ -19,31 +21,34 @@ const PriceLines = props => {
         pickUpText={props.labels.pickUp}
         currencyStyle={{ color: "red" }}
         applyPickup={() => {
-          props.applyPickup(props.data.itemPickupDiscount);
+          props.applyPickupDiscount();
         }}
       />
       <FeesPriceLine
         label={props.labels.estFees}
-        value={props.data.itemDiscount}
+        value={props.fees}
         currencyStyle={{ color: "red" }}
+        zipcode={props.zipcode}
       />
       <Border />
       <TotalPriceLine
         label={props.labels.total}
-        value={props.data.itemDiscount}
+        value={props.total}
         style={{ weight: "bold", size: 1.1 }}
-        currencyStyle={{ weight: "bold", size: 1.1 }}
+        currencyStyle={{ weight: "bold", size: 1.2 }}
       />
     </Container>
   );
 };
 const Border = styled.div`
+  width: 100%;
   border-bottom: 1px solid rgba(100, 100, 100, 0.5);
 `;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 95%;
+  height: 30%;
   justify-content: space-around;
   align-items: center;
   margin-left: 7px;

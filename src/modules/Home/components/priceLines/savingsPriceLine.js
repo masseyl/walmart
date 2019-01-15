@@ -9,6 +9,7 @@ class SavingsPriceLine extends PureComponent {
     this.state = {
       showPopup: false
     };
+    console.log("savings");
   }
 
   onClick = event => {

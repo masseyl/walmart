@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import CurrencyFormat from "../currencyFormat";
 const SimplePriceLine = props => {
+  console.log("simple");
   return (
     <Container>
       <Item>{props.label}</Item>

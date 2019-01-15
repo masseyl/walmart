@@ -1,4 +1,9 @@
-import { GET_ITEM, APPLY_PICKUP_DISCOUNT, APPLY_PROMO_CODE } from "./constants";
+import {
+  GET_ITEM,
+  APPLY_PICKUP_DISCOUNT,
+  APPLY_PROMO_CODE,
+  CHANGE_ZIP_CODE
+} from "./constants";
 
 export function getItem() {
   return {
@@ -10,8 +15,15 @@ export function applyPickupDiscount() {
     type: APPLY_PICKUP_DISCOUNT
   };
 }
-export function applyPromoCode() {
+export function applyPromoCode(value) {
   return {
-    type: APPLY_PROMO_CODE
+    type: APPLY_PROMO_CODE,
+    value
+  };
+}
+export function changeZipCode(zip) {
+  return {
+    type: CHANGE_ZIP_CODE,
+    zip
   };
 }

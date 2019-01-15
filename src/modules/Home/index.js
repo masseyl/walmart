@@ -2,25 +2,29 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import Background from "../../components/background";
-import DetailContainer from "./components/detailContainer";
 import Container from "./components/container";
-import Loading from "./components/loading";
 
-import { getMessages, removeMessage } from "./actions";
-import { dimensions, sharedTimings } from "../../config/defaults";
+import { applyPickupDiscount, applyPromoCode, changeZipCode } from "./actions";
 
 class Home extends Component {
-  getTaxRate = zip => {
-    return tax[zip] || 0.05;
+  changeZipCode = zip => {
+    this.props.changeZipCode(zip);
   };
-  render() {
-    const content = this.props.messages;
-    const width = this.state.width;
-    let listHeight = this.state.height || window.innerHeight;
 
+  render() {
     return (
       <Background>
-        <Container data={item} labels={labels} getTaxRate={this.getTaxRate} />
+        <Container
+          item={this.props.item}
+          labels={this.props.labels}
+          changeZipCode={this.changeZipCode}
+          taxRate={this.props.taxRate}
+          zipcode={this.props.zipcode}
+          applyPickupDiscount={this.props.applyPickupDiscount}
+          applyPromoCode={this.props.applyPromoCode}
+          promoDiscount={this.props.promoDiscount}
+          pickupDiscount={this.props.pickupDiscount}
+        />
       </Background>
     );
   }
@@ -29,15 +33,19 @@ class Home extends Component {
 function mapStateToProps(state) {
   return {
     item: state.Home.present.item,
-    labels: state.Home.present.labels
+    labels: state.Home.present.labels,
+    taxRate: state.Home.present.currentTaxRate,
+    pickupDiscount: state.Home.present.pickupDiscount,
+    promoDiscount: state.Home.present.promoDiscount,
+    zipcode: state.Home.present.currentZipCode
   };
 }
 
 function mapPropsToDispatch(dispatch) {
   return {
-    applyPromoCode: (limit, pageToken) =>
-      dispatch(applyPromoCode(limit, pageToken)),
-    applyPickupDiscount: index => dispatch(applyPickupDiscount(index))
+    applyPromoCode: value => dispatch(applyPromoCode(value)),
+    applyPickupDiscount: () => dispatch(applyPickupDiscount()),
+    changeZipCode: zip => dispatch(changeZipCode(zip))
   };
 }
 

@@ -4,15 +4,12 @@ import styled from "styled-components";
 import CurrencyFormat from "../currencyFormat";
 
 const FeesPriceLine = props => {
-  const label = props.label.replace("${zip}", "");
+  console.log("fees");
+  const label = props.label.replace("${zip})", "") + props.zipcode + ")";
+
   return (
     <Container>
-      <LeftItem>
-        {label}
-        <Zip onClick={onClick} onMouseOver={onMouseOver}>
-          {props.zip || "12345"}
-        </Zip>
-      </LeftItem>
+      <LeftItem>{label}</LeftItem>
       <CurrencyFormat value={props.value} />
     </Container>
   );
@@ -41,6 +38,8 @@ const Container = styled.div`
 
 const LeftItem = styled.div`
   font-size: ${props => props.size || 0.75}rem;
+  width: 80%;
+  cursor: pointer;
 `;
 const RightItem = styled.div`
   font-size: ${props => props.size || 0.75}rem;
