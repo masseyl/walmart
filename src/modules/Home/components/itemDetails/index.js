@@ -59,8 +59,10 @@ class ItemDetail extends PureComponent {
 export default ItemDetail;
 
 const Container = styled.div`
+  margin-top: 7px;
+  margin-bottom: 7px;
   margin-left: 7px;
-  width: 75%;
+  width: 98%;
 `;
 
 const Image = styled.img`
@@ -70,9 +72,15 @@ const Image = styled.img`
 const Body = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
 `;
-const TextContainer = styled.div``;
-const Description = styled.div``;
+const TextContainer = styled.div`
+  width: 100%;
+`;
+const Description = styled.div`
+  width: 100%;
+`;
 const MarkedDown = styled.div`
   font-weight: bold;
 `;

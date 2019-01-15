@@ -46,9 +46,10 @@ class Discount extends PureComponent {
 export default Discount;
 
 const Container = styled.div`
+  margin-top: 7px;
+  margin-bottom: 7px;
   margin-left: 7px;
-  width: 75%;
-  border: 1px solid rgba(100, 100, 100, 0.5);
+  width: 98%;
 `;
 
 const Image = styled.img`
@@ -58,9 +59,8 @@ const Image = styled.img`
 const Body = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
-  margin-right: 14px;
 `;
 const TextContainer = styled.div`
   margin-top: 7px;
@@ -82,6 +82,7 @@ const Button = styled.div`
   :hover {
     background-color: rgba(200, 100, 10, 0.4);
   }
+  margin-top: 14px;
   padding: 7px;
   border-radius: 4px;
   border: 1px solid black;

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import PriceLines from "./priceLines/priceLines";
 import ItemDetail from "./itemDetails";
 import Discount from "./discount";
+import Border from "./border";
 class Container extends PureComponent {
   constructor(props) {
     super(props);
@@ -53,6 +54,7 @@ class Container extends PureComponent {
           changeTaxZone={this.changeTaxZone}
           zipcode={this.props.zipcode}
         />
+        <Border />
         <ItemDetail
           data={this.state.data}
           labels={this.state.labels}
@@ -60,6 +62,7 @@ class Container extends PureComponent {
           subTotal={subTotal}
           originalPrice={this.props.item.itemPrice}
         />
+        <Border />
         <Discount
           data={this.state.data}
           labels={this.state.labels}
@@ -75,6 +78,7 @@ class Container extends PureComponent {
 
 const Wrapper = styled.div`
   height: 500px;
+  min-width: 235px;
   border: 10px solid green;
   background-color: white;
 `;

@@ -5,6 +5,7 @@ import SimplePriceLine from "./simplePriceLine";
 import SavingsPriceLine from "./savingsPriceLine";
 import FeesPriceLine from "./feesPriceLine";
 import TotalPriceLine from "./totalPriceLine";
+import Border from "../border";
 
 const PriceLines = props => {
   console.log("priceline");
@@ -40,10 +41,6 @@ const PriceLines = props => {
     </Container>
   );
 };
-const Border = styled.div`
-  width: 100%;
-  border-bottom: 1px solid rgba(100, 100, 100, 0.5);
-`;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
