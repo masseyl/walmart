@@ -77,7 +77,7 @@ class Container extends PureComponent {
 }
 
 const Wrapper = styled.div`
-  height: 250px;
+  height: 300px;
   min-width: 235px;
   border: 10px solid green;
   background-color: white;
